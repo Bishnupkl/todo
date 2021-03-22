@@ -22,10 +22,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
     'prefix' => 'auth',
 
-], function(){
-    Route::post('register','\App\Http\Controllers\UserController@register');
-    Route::post('login','\App\Http\Controllers\UserController@login');
+], function () {
+    Route::post('register', '\App\Http\Controllers\UserController@register');
+    Route::post('login', '\App\Http\Controllers\UserController@login');
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get("user-detail", "\App\Http\Controllers\UserController@userDetail");
+        Route::post("create-task", "App\Http\Controllers\TaskController@create");
+        Route::get("tasks", "App\Http\Controllers\TaskController@index");
+        Route::get("task/{task_id}", "App\Http\Controllers\TaskController@show");
+        Route::delete("task/{task_id}", "App\Http\Controllers\TaskController@destroy");
+
     });
 });
