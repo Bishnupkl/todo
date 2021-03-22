@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,5 @@ Route::group([
     'prefix' => 'auth',
 
 ], function(){
-    Route::post('register', [\App\Http\Controllers\UserController::class,'index']);
+    Route::post('register','\App\Http\Controllers\UserController@register');
 });

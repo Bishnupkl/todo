@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 class UserController extends Controller
 {
     public function register(Request $request)
     {
-        $validator=Validator::make($request->all(), [
+        $validator=\Illuminate\Support\Facades\Validator::make($request->all(), [
         'name' => 'required',
         'email' => 'required|email',
         'password' => 'required',
@@ -38,7 +39,7 @@ class UserController extends Controller
 
     public function login(Request  $request)
     {
-        $validator=Validator::make($request->all(), [
+        $validator=\Illuminate\Support\Facades\Validator::make($request->all(), [
 
             'email' => 'required|email',
             'password' => 'required',
