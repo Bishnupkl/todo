@@ -27,10 +27,10 @@ Route::group([
     Route::post('login', '\App\Http\Controllers\UserController@login');
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get("user-detail", "\App\Http\Controllers\UserController@userDetail");
-        Route::post("create-task", "App\Http\Controllers\TaskController@create");
-        Route::get("tasks", "App\Http\Controllers\TaskController@index");
-        Route::get("task/{task_id}", "App\Http\Controllers\TaskController@show");
-        Route::delete("task/{task_id}", "App\Http\Controllers\TaskController@destroy");
+        Route::post("create-todo", "App\Http\Controllers\TaskController@create");
+        Route::get("todos", "App\Http\Controllers\TaskController@index");
+        Route::get("todo/{todo_id}", "App\Http\Controllers\TaskController@show");
+        Route::delete("todo/{todo_id}", "App\Http\Controllers\TaskController@delete");
 
     });
 });
