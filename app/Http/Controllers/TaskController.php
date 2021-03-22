@@ -40,7 +40,7 @@ class TaskController extends Controller
         $user = Auth::user();
         $validator = Validator::make($request->all(),
             [
-                "task_title" => "required",
+                "title" => "required",
                 "description" => "required",
             ]
         );
@@ -50,7 +50,7 @@ class TaskController extends Controller
         }
 
         $task_array = array(
-            "task_title" => $request->task_title,
+            "title" => $request->title,
             "description" => $request->description,
             "status" => $request->status,
             "user_id" => $user->id
