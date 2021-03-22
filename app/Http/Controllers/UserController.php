@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
 
 class UserController extends Controller
@@ -23,6 +24,7 @@ class UserController extends Controller
         }
 
         $data = $request->all();
+        $data['password']=bcrypt($request->password);
         $user = User::create($data);
 
         if ($user) {
@@ -49,6 +51,18 @@ class UserController extends Controller
             return response()->json(["val error"=> $validator->errors()]);
         }
 
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $user       =       Auth::user();
+            $token      =       $user->createToken('token')->accessToken;
 
+            return response()->json([ "success" => true, "login" => true, "token" => $token, "data" => $user]);
+        }
+        else {
+            return response()->json(["status" => "failed", "success" => false, "message" => "Whoops! invalid email or password"]);
+        }
     }
+
+
+
+
 }

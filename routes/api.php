@@ -24,4 +24,5 @@ Route::group([
 
 ], function(){
     Route::post('register','\App\Http\Controllers\UserController@register');
+    Route::post('login','\App\Http\Controllers\UserController@login');
 });
