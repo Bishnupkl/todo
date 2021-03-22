@@ -25,4 +25,7 @@ Route::group([
 ], function(){
     Route::post('register','\App\Http\Controllers\UserController@register');
     Route::post('login','\App\Http\Controllers\UserController@login');
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get("user-detail", "\App\Http\Controllers\UserController@userDetail");
+    });
 });

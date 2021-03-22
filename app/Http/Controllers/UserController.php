@@ -10,6 +10,9 @@ use Illuminate\Validation\Validator;
 
 class UserController extends Controller
 {
+
+    private $sucess_status = 200;
+
     public function register(Request $request)
     {
         $validator=\Illuminate\Support\Facades\Validator::make($request->all(), [
@@ -58,7 +61,17 @@ class UserController extends Controller
             return response()->json([ "success" => true, "login" => true, "token" => $token, "data" => $user]);
         }
         else {
-            return response()->json(["status" => "failed", "success" => false, "message" => "Whoops! invalid email or password"]);
+            return response()->json(["status" => $this->sucess_status,"status" => "failed", "success" => false, "message" => "Whoops! invalid email or password"]);
+        }
+    }
+
+    public function userDetail() {
+        $user           =       Auth::user();
+        if(!is_null($user)) {
+            return response()->json(["status" => $this->sucess_status, "success" => true, "user" => $user]);
+        }
+        else {
+            return response()->json(["status" => "failed", "success" => false, "message" => "Whoops! no user found"]);
         }
     }
 
